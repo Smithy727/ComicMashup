@@ -43,7 +43,7 @@ function setup() {
   clearButton = createButton("Clear");
   clearButton.mousePressed(clearCanvas);
 
-  saveButton = createButton("Save");
+  saveButton = createButton("Upload");
   saveButton.mousePressed(savePanel);
 
   const menu = select("#menu");
