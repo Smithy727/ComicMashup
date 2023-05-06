@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     margin:0 ;
-    padding: 5;
+    
   }
   li, a, button {
     font-family: 'Comic Neue', cursive;
@@ -20,6 +20,14 @@
     font-family: 'Comic Neue', cursive;
   
   }
+  #mainCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
   
   nav {
     order: 1;
@@ -100,18 +108,43 @@
     justify-items: center;
     align-items: center;
     margin-bottom: 50px;
+  }
+
+
+  .panel-image-container {
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    margin-top: 20px;
+    border-spacing: 10px 10px;
+    grid-gap: 5px;
+    
     
   }
   
+  .panel-image-container img {
+    max-width: 50%;
+    height: auto;
+    border: 5px solid var(--borders);
+    background-color: #261C69;
+  }
+  
+.left-image,
+.right-image {
+    width: 60%;
+    height: auto;
+    object-fit: contain;
+    margin: 0 1%;
+}
+
   .image-container {
     margin-right: 20px; /* Add margin to the right to separate from the canvas container */
     margin-top: 60px;
     background-color: #261C69;
     padding: 15px;
-    
   }
+
   .image-container :hover {
-   
     border: 5px solid var(--primary); /* Add a border around each individual image */
   }
   
@@ -140,7 +173,7 @@
   }
 
   .header-container {
-    background:url('images/HeaderBackground.jpg');
+    background: url('images/HeaderBackground.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -153,31 +186,37 @@
     margin-bottom: 50px;
     stroke: #282828;
     font-family: 'Comic Neue', cursive;
-    
     border: 15px solid var(--borders);
+    height: 25vh; 
   }
+  
   
   .header-container h1 {
     margin: 0;
     color: #ffffff;
     font-family: 'Comic Neue', cursive; 
   }
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
   
   body {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     color: #f5f5f5;
     font-family: 'Comic Neue', cursive;
     font-family: 'Fira Sans', sans-serif;
-    background:url('images/BodyBackground.jpg');
-    background-size:cover;
-    background-position: center;
+    background-image: url('images/BodyBackground.jpg');
     background-repeat: no-repeat;
-    font-family: 'Comic Neue', cursive;
-    
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed
   }
+  
   
   
 
@@ -190,10 +229,10 @@
     gap: 20px;
     margin-right: 20px;
     margin-left: 20px;
-    
   }
+
   .app-container img {
-    width: 400px; /* Set the width of the image */
+     width: 400px; /* Set the width of the image */
     height: auto;
     margin-right: 20px; /* Add margin to the right to separate from the canvas container */
     margin-top: 60px;
@@ -249,19 +288,19 @@
     object-fit: cover;
 }
   
-  #canvasContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 10px solid, var(--borders);
-    width: fit-content;
-    height: fit-content;
-    padding: 1px;
-    box-sizing: content-box;
-    margin-top: 60px;
-    background-color: #261C69;
-    padding: 10px;
-  }
+#canvasContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 10px solid, var(--borders);
+  width: fit-content;
+  height: fit-content;
+  padding: 1px;
+  box-sizing: content-box;
+  margin-top: 60px;
+  background-color: #261C69;
+  padding: 10px;
+}
   /* Canvas End */
   footer {
     margin-top: 160px;

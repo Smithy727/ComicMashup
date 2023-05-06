@@ -7,7 +7,9 @@ let brushStyleDropdown;
 let clearButton;
 let panelButtons;
 let saveButton;
+let undoButton;
 let savedImages = [];
+let canvasHistory = [];
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -20,10 +22,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
 
 function setup() {
-  mainCanvas = createCanvas(800, 800);
+  mainCanvas = createCanvas(800, 800,);
   mainCanvas.parent("canvasContainer");
   background(255);
 
@@ -31,6 +34,8 @@ function setup() {
   currentCanvas = 0;
   canvases.forEach((canvas) => {
     canvas.background(255);
+    undoButton = createButton("Undo");
+    undoButton.mousePressed(undoLastBrushStroke);
   });
 
   colorWheel = createColorPicker("#000000");
@@ -53,6 +58,7 @@ function setup() {
     button.mousePressed(() => switchCanvas(i));
     panelButtons.push(button);
   }
+  
 
   const menu = select("#menu");
   menu.child(colorWheel);
@@ -61,14 +67,46 @@ function setup() {
   menu.child(clearButton);
   menu.child(saveButton);
   panelButtons.forEach((button) => menu.child(button));
+  menu.child(undoButton);
+}
+function displayImagesFromFirebase() {
+  const storageRef = firebase.storage().ref();
+
+  storageRef.listAll().then((res) => {
+    res.items.forEach((imageRef, index) => {
+      imageRef.getDownloadURL().then((url) => {
+        // Create a container element for the image
+        const container = document.createElement("div");
+        container.className = "panel-image-container";
+
+        // Create an image element
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = `Example ${index + 1}`;
+
+        // Append the image to the container element
+        container.appendChild(img);
+
+        // Append the container to the corresponding panel-image-container
+        const panelImageContainer = document.getElementById(`panel-image-container-${index}`);
+        panelImageContainer.appendChild(container);
+      });
+    });
+  });
 }
 
+
 function draw() {
+  mainCanvas.canvas.style.maxWidth = "100%";
+
   background(255);
   image(canvases[currentCanvas], 0, 0);
 
   if (mouseIsPressed) {
     if (mouseButton === LEFT) {
+      if (!canvasHistory[currentCanvas]) {
+        canvasHistory[currentCanvas] = [];
+      }
       const brushStyle = brushStyleDropdown.value();
       if (brushStyle === "normal") {
         drawNormalBrush(canvases[currentCanvas]);
@@ -78,15 +116,49 @@ function draw() {
     }
   }
 }
-
-
-function drawNormalBrush(canvas) {
-  canvas.stroke(colorWheel.color());
-  canvas.strokeWeight(brushSizeSlider.value());
-  canvas.line(pmouseX, pmouseY, mouseX, mouseY);
+function mousePressed() {
+  if (mouseButton === LEFT) {
+    if (!canvasHistory[currentCanvas]) {
+      canvasHistory[currentCanvas] = [];
+    }
+    canvasHistory[currentCanvas].push(canvases[currentCanvas].get());
+  }
 }
 
-function drawWatercolorBrush(canvas) {
+function mouseReleased() {
+  if (mouseButton === LEFT) {
+    canvasHistory[currentCanvas].push(canvases[currentCanvas].get());
+  }
+}
+
+
+function undoLastBrushStroke() {
+  if (canvasHistory[currentCanvas] && canvasHistory[currentCanvas].length > 0) {
+    canvasHistory[currentCanvas].pop();
+    if (canvasHistory[currentCanvas].length > 0) {
+      canvases[currentCanvas].image(canvasHistory[currentCanvas][canvasHistory[currentCanvas].length - 1], 0, 0);
+    } else {
+      clearCanvas();
+    }
+  }
+}
+
+
+const clearCanvas = () => {
+  canvases[currentCanvas].clear();
+  canvases[currentCanvas].background(255);
+};
+
+
+
+
+function drawNormalBrush() {
+  canvases[currentCanvas].stroke(colorWheel.color());
+  canvases[currentCanvas].strokeWeight(brushSizeSlider.value());
+  canvases[currentCanvas].line(pmouseX, pmouseY, mouseX, mouseY);
+}
+
+function drawWatercolorBrush() {
   const brushSize = brushSizeSlider.value();
   const numLayers = 15;
   const layerSpread = 1.5;
@@ -102,15 +174,15 @@ function drawWatercolorBrush(canvas) {
       layerAlpha
     );
 
-    canvas.stroke(layerColor);
-    canvas.strokeWeight(layerSize);
-    canvas.line(pmouseX, pmouseY, mouseX, mouseY);
+    canvases[currentCanvas].stroke(layerColor);
+    canvases[currentCanvas].strokeWeight(layerSize);
+    canvases[currentCanvas].line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
 
-const clearCanvas = () => {
-  canvases[currentCanvas].background(255);
-};
+
+
+
 
 function switchCanvas(index) {
   currentCanvas = index;
@@ -141,11 +213,11 @@ function saveToFirebase(savedCanvas) {
           } else {
             console.error("Element with ID 'gallery' not found");
           }
+          location.reload(); // Reload the page after the image is saved
         });
       });
     });
 }
-
 
 var storageRef = firebase.storage().ref();
 storageRef.listAll().then(function(result) {
@@ -154,7 +226,7 @@ storageRef.listAll().then(function(result) {
       // Add image to gallery
       var img = document.createElement('img');
       img.src = url;
-      document.getElementById('gallery').appendChild(img);
+      document.getElementById('panel-image-container').appendChild(img);
     });
   });
 });
