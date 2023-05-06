@@ -1,356 +1,356 @@
 * {
-    box-sizing: border-box;
-    margin:0 ;
-    
-  }
-  li, a, button {
-    font-family: 'Comic Neue', cursive;
+  box-sizing: border-box;
+  margin:0 ;
+  
+}
+li, a, button {
+  font-family: 'Comic Neue', cursive;
 
-    font-weight: 500;
-    font-size: 26px;
-    color: #f5f5f5;
-    text-decoration: none;
-  }
-  header {
-    position: relative; /* Add position relative to the header */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 50px 10%;
-    font-family: 'Comic Neue', cursive;
-  
-  }
-  #mainCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  
-  nav {
-    order: 1;
-    border: 13px solid var(--borders); /* Add a border at the bottom of the nav bar */
-    border-width: 10px;
-    background-color: #242222d9;
-    font-family: 'Comic Neue', cursive;
+  font-weight: 500;
+  font-size: 26px;
+  color: #f5f5f5;
+  text-decoration: none;
+}
+header {
+  position: relative; /* Add position relative to the header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 10%;
+  font-family: 'Comic Neue', cursive;
 
-  }
-   .text {
-    background-color: #242222d9;
-    border: #261C69;
-    
-
-   }
-   .title{
-    font-size:xx-large;
-    stroke: #282828;
-    font-family: 'Comic Neue', cursive;
-    font-family: 'Fira Sans', sans-serif;
-    
-   }
-  .nav_links {
-    list-style: none;
-  }
-  .nav_links li{
-    display: inline-block;
-    padding: 0px 20px;
-  }
-  .nav_links li:nth-child(1){
-    padding: 0 20px 0 0;
-  }
-  .nav_links li a {
-    transition: all 0.3s ease 0s;
-  }
-  .nav_links li a:hover {
-      color: #FFC542 ;
-  }
-  
-  button {
-    margin-left: 20px;
-    padding: 9px 25px;
-    background-color: #faa200;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-  }
-  button:hover {
-    background-color:#da531a; 
-  }
-  .canvas-button {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 25px;
-    background-color: #faa200;
-    color: #f5f5f5;
-    font-family: 'Comic Neue', cursive;
-    font-family: 'Fira Sans', sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    text-decoration: none;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-  }
-  .button-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 50px;
-  }
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 400px);
-    border-spacing: 10px 10px;
-    grid-gap: 10px; /* Set the gap between grid rows and columns to 10px */
-    justify-items: center;
-    align-items: center;
-    margin-bottom: 50px;
-  }
+}
+#mainCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 
 
-  .panel-image-container {
-    display:grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    margin-top: 20px;
-    border-spacing: 10px 10px;
-    grid-gap: 5px;
-    
-    
-  }
+nav {
+  order: 1;
+  border: 13px solid var(--borders); /* Add a border at the bottom of the nav bar */
+  border-width: 10px;
+  background-color: #242222d9;
+  font-family: 'Comic Neue', cursive;
+
+}
+ .text {
+  background-color: #242222d9;
+  border: #261C69;
   
-  .panel-image-container img {
-    max-width: 50%;
-    height: auto;
-    border: 5px solid var(--borders);
-    background-color: #261C69;
-  }
+
+ }
+ .title{
+  font-size:xx-large;
+  stroke: #282828;
+  font-family: 'Comic Neue', cursive;
+  font-family: 'Fira Sans', sans-serif;
   
+ }
+.nav_links {
+  list-style: none;
+}
+.nav_links li{
+  display: inline-block;
+  padding: 0px 20px;
+}
+.nav_links li:nth-child(1){
+  padding: 0 20px 0 0;
+}
+.nav_links li a {
+  transition: all 0.3s ease 0s;
+}
+.nav_links li a:hover {
+    color: #FFC542 ;
+}
+
+button {
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: #faa200;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+button:hover {
+  background-color:#da531a; 
+}
+.canvas-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 25px;
+  background-color: #faa200;
+  color: #f5f5f5;
+  font-family: 'Comic Neue', cursive;
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  border-spacing: 10px 10px;
+  grid-gap: 10px; /* Set the gap between grid rows and columns to 10px */
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.savedImagesContainer{
+  max-width: 60%;
+}
+
+.panel-image-container {
+
+  margin-top: 20px;
+  border-spacing: 10px 10px;
+  grid-gap: 5px;
+  
+  
+}
+
+.panel-image-container img {
+  max-width: 10%;
+  height: auto;
+  border: 5px solid var(--borders);
+  background-color: #261C69;
+}
+
 .left-image,
 .right-image {
-    width: 60%;
-    height: auto;
-    object-fit: contain;
-    margin: 0 1%;
+  width: 60%;
+  height: auto;
+  object-fit: contain;
+  margin: 0 1%;
 }
 
-  .image-container {
-    margin-right: 20px; /* Add margin to the right to separate from the canvas container */
-    margin-top: 60px;
-    background-color: #261C69;
-    padding: 15px;
-  }
-
-  .image-container :hover {
-    border: 5px solid var(--primary); /* Add a border around each individual image */
-  }
-  
-  .image-container img {
-    max-width: 100%; 
-    display: block;
-    object-fit: contain; 
-  }
-
-  .image-box {
-    width: calc(33.333% - 20px);
-    box-sizing: border-box;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .image-box img {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .canvas-button:hover {
-    background-color: #da531a;
-  }
-
-  .header-container {
-    background: url('images/HeaderBackground.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 70%;
-    padding: 100px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-bottom: 50px;
-    stroke: #282828;
-    font-family: 'Comic Neue', cursive;
-    border: 15px solid var(--borders);
-    height: 25vh; 
-  }
-  
-  
-  .header-container h1 {
-    margin: 0;
-    color: #ffffff;
-    font-family: 'Comic Neue', cursive; 
-  }
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
-  
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #f5f5f5;
-    font-family: 'Comic Neue', cursive;
-    font-family: 'Fira Sans', sans-serif;
-    background-image: url('images/BodyBackground.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed
-  }
-  
-  
-  
-
-  /* Canvas  */
-  
-  .app-container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Change this line */
-    gap: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-  }
-
-  .app-container img {
-     width: 400px; /* Set the width of the image */
-    height: auto;
-    margin-right: 20px; /* Add margin to the right to separate from the canvas container */
-    margin-top: 60px;
-    border: 10px solid var(--borders);
-  }
-  
-  #menu {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    flex-direction: column;
-    min-height: 30vh;
-    border: 10px solid var(--borders);
-    background-color: #212120;
-    padding: 10px;
-    padding-right: 25px;
-    margin-top: 60px;
-    margin-right: 20px;
-    margin-left: 20px;
-  }
-
-  
-  :root{
-    --primary: #da531a;
-    --seconday: #fcbf06;
-    --borders: #261C69;
-    --error: #ff4a4a; 
-  }
-  .App{
-    max-width: 1080px;
-    margin: 0 auto;
-    background: white;
-    padding : 20px;
-  }
-  .app-container {
-    display: flex;
-    justify-content: center;
-    align-items:flex-start;
-    gap: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
-  }
-  .app-container img {
-    width: 400px;
-    height: auto;
-    margin-right: 20px;
-    margin-top: 60px;
-    border: 10px solid var(--borders);
-  }
-  .background-image {
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover;
+.image-container {
+  margin-right: 20px; /* Add margin to the right to separate from the canvas container */
+  margin-top: 60px;
+  background-color: #261C69;
+  padding: 15px;
 }
-  
-#canvasContainer {
+
+.image-container :hover {
+  border: 5px solid var(--primary); /* Add a border around each individual image */
+}
+
+.image-container img {
+  max-width: 100%; 
+  display: block;
+  object-fit: contain; 
+}
+
+.image-box {
+  width: calc(33.333% - 20px);
+  box-sizing: border-box;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid, var(--borders);
-  width: fit-content;
-  height: fit-content;
-  padding: 1px;
-  box-sizing: content-box;
-  margin-top: 60px;
-  background-color: #261C69;
-  padding: 10px;
 }
-  /* Canvas End */
-  footer {
-    margin-top: 160px;
-    background-color: var(--borders);
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #content {
-    overflow: auto;
-    height: 100%
-  }
 
-  .text {
-    font-family: 'Comic Neue', cursive;
-    background-color: #261C69;
-    border: 5px solid #261C69;
-    background-position: center;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    padding: 20px;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    stroke: #282828;
-    font-size: 20px;
-   }
-   .text:hover {
-    color:#FFC542 ;
-   }
-   .titleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    border: 20px solid var(--borders); /* Add a border around each individual image */
-    background-color: #261C69;
-   }
-    
-   .center{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #261C69;
-    border: 10px solid #261C69;
-    font-family: 'Comic Neue', cursive;
-    
-  }
-    
+.image-box img {
+  max-width: 100%;
+  height: auto;
+}
+
+.canvas-button:hover {
+  background-color: #da531a;
+}
+
+.header-container {
+  background: url('images/HeaderBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 100px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  stroke: #282828;
+  font-family: 'Comic Neue', cursive;
+  border: 15px solid var(--borders);
+  height: 25vh; 
+}
+
+
+.header-container h1 {
+  margin: 0;
+  color: #ffffff;
+  font-family: 'Comic Neue', cursive; 
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #f5f5f5;
+  font-family: 'Comic Neue', cursive;
+  font-family: 'Fira Sans', sans-serif;
+  background-image: url('images/BodyBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed
+}
+
+
+
+
+/* Canvas  */
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Change this line */
+  gap: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.app-container img {
+   width: 400px; /* Set the width of the image */
+  height: auto;
+  margin-right: 20px; /* Add margin to the right to separate from the canvas container */
+  margin-top: 60px;
+  border: 10px solid var(--borders);
+}
+
+#menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-direction: column;
+  min-height: 30vh;
+  border: 10px solid var(--borders);
+  background-color: #212120;
+  padding: 10px;
+  padding-right: 25px;
+  margin-top: 60px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+
+:root{
+  --primary: #da531a;
+  --seconday: #fcbf06;
+  --borders: #261C69;
+  --error: #ff4a4a; 
+}
+.App{
+  max-width: 1080px;
+  margin: 0 auto;
+  background: white;
+  padding : 20px;
+}
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items:flex-start;
+  gap: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.app-container img {
+  width: 400px;
+  height: auto;
+  margin-right: 20px;
+  margin-top: 60px;
+  border: 10px solid var(--borders);
+}
+.background-image {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover;
+}
+
+#canvasContainer {
+display: flex;
+justify-content: center;
+align-items: center;
+border: 10px solid, var(--borders);
+width: 800px;
+height: auto;
+padding: 1px;
+box-sizing: content-box;
+margin-top: 60px;
+background-color: #261C69;
+padding: 10px;
+}
+/* Canvas End */
+footer {
+  margin-top: 160px;
+  background-color: var(--borders);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#content {
+  overflow: auto;
+  height: 100%
+}
+
+.text {
+  font-family: 'Comic Neue', cursive;
+  background-color: #261C69;
+  border: 5px solid #261C69;
+  background-position: center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  padding: 20px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  stroke: #282828;
+  font-size: 20px;
+ }
+ .text:hover {
+  color:#FFC542 ;
+ }
+ .titleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  border: 20px solid var(--borders); /* Add a border around each individual image */
+  background-color: #261C69;
+ }
+  
+ .center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #261C69;
+  border: 10px solid #261C69;
+  font-family: 'Comic Neue', cursive;
+  
+}
   

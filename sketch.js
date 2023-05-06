@@ -1,11 +1,9 @@
 let mainCanvas;
-let canvases;
 let currentCanvas;
 let colorWheel;
 let brushSizeSlider;
 let brushStyleDropdown;
 let clearButton;
-let panelButtons;
 let saveButton;
 let undoButton;
 let savedImages = [];
@@ -24,19 +22,15 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 
-
 function setup() {
-  mainCanvas = createCanvas(800, 800,);
+  mainCanvas = createCanvas(800, 800);
   mainCanvas.parent("canvasContainer");
   background(255);
 
-  canvases = [    createGraphics(800, 800),    createGraphics(800, 800),    createGraphics(800, 800),  ];
-  currentCanvas = 0;
-  canvases.forEach((canvas) => {
-    canvas.background(255);
-    undoButton = createButton("Undo");
-    undoButton.mousePressed(undoLastBrushStroke);
-  });
+  currentCanvas = createGraphics(800, 800);
+  currentCanvas.background(255);
+  undoButton = createButton("Undo");
+  undoButton.mousePressed(undoLastBrushStroke);
 
   colorWheel = createColorPicker("#000000");
   brushSizeSlider = createSlider(1, 50, 10);
@@ -52,23 +46,17 @@ function setup() {
   saveButton = createButton("Save");
   saveButton.mousePressed(savePanel);
 
-  panelButtons = [];
-  for (let i = 0; i < 3; i++) {
-    const button = createButton(`Panel ${i + 1}`);
-    button.mousePressed(() => switchCanvas(i));
-    panelButtons.push(button);
-  }
-  
-
   const menu = select("#menu");
   menu.child(colorWheel);
   menu.child(brushSizeSlider);
   menu.child(brushStyleDropdown);
   menu.child(clearButton);
   menu.child(saveButton);
-  panelButtons.forEach((button) => menu.child(button));
   menu.child(undoButton);
 }
+
+// The rest of the code remains the same.
+
 function displayImagesFromFirebase() {
   const storageRef = firebase.storage().ref();
 
@@ -100,7 +88,7 @@ function draw() {
   mainCanvas.canvas.style.maxWidth = "100%";
 
   background(255);
-  image(canvases[currentCanvas], 0, 0);
+  image(currentCanvas, 0, 0);
 
   if (mouseIsPressed) {
     if (mouseButton === LEFT) {
@@ -109,54 +97,51 @@ function draw() {
       }
       const brushStyle = brushStyleDropdown.value();
       if (brushStyle === "normal") {
-        drawNormalBrush(canvases[currentCanvas]);
+        drawNormalBrush(currentCanvas);
       } else if (brushStyle === "watercolor") {
-        drawWatercolorBrush(canvases[currentCanvas]);
+        drawWatercolorBrush(currentCanvas);
       }
     }
   }
 }
+
 function mousePressed() {
   if (mouseButton === LEFT) {
     if (!canvasHistory[currentCanvas]) {
       canvasHistory[currentCanvas] = [];
     }
-    canvasHistory[currentCanvas].push(canvases[currentCanvas].get());
+    canvasHistory[currentCanvas].push(currentCanvas.get());
   }
 }
 
 function mouseReleased() {
   if (mouseButton === LEFT) {
-    canvasHistory[currentCanvas].push(canvases[currentCanvas].get());
+    canvasHistory[currentCanvas].push(currentCanvas.get());
   }
 }
-
 
 function undoLastBrushStroke() {
   if (canvasHistory[currentCanvas] && canvasHistory[currentCanvas].length > 0) {
     canvasHistory[currentCanvas].pop();
     if (canvasHistory[currentCanvas].length > 0) {
-      canvases[currentCanvas].image(canvasHistory[currentCanvas][canvasHistory[currentCanvas].length - 1], 0, 0);
+      currentCanvas.image(canvasHistory[currentCanvas][canvasHistory[currentCanvas].length - 1], 0, 0);
     } else {
       clearCanvas();
     }
   }
 }
 
-
 const clearCanvas = () => {
-  canvases[currentCanvas].clear();
-  canvases[currentCanvas].background(255);
+  currentCanvas.clear();
+  currentCanvas.background(255);
 };
 
-
-
-
 function drawNormalBrush() {
-  canvases[currentCanvas].stroke(colorWheel.color());
-  canvases[currentCanvas].strokeWeight(brushSizeSlider.value());
-  canvases[currentCanvas].line(pmouseX, pmouseY, mouseX, mouseY);
+  currentCanvas.stroke(colorWheel.color());
+  currentCanvas.strokeWeight(brushSizeSlider.value());
+  currentCanvas.line(pmouseX, pmouseY, mouseX, mouseY);
 }
+
 
 function drawWatercolorBrush() {
   const brushSize = brushSizeSlider.value();
@@ -230,5 +215,3 @@ storageRef.listAll().then(function(result) {
     });
   });
 });
-
-
