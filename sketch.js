@@ -53,12 +53,45 @@ function setup() {
   menu.child(clearButton);
   menu.child(saveButton);
   menu.child(undoButton);
+
+  window.onload = function() {
+    displayImagesFromFirebase();
+  };
+  
 }
 
 // The rest of the code remains the same.
 
 function displayImagesFromFirebase() {
   const storageRef = firebase.storage().ref();
+
+  let imageUrls = [];
+res.items.forEach((imageRef) => {
+  imageRef.getDownloadURL().then((url) => {
+    imageUrls.push(url);
+    if (imageUrls.length === res.items.length) {
+      // All image URLs have been loaded, so display them in order
+      displayImagesInOrder(imageUrls);
+    }
+  });
+});
+function displayImagesInOrder(imageUrls) {
+  for (let i = 0; i < imageUrls.length; i++) {
+    const container = document.createElement("div");
+    container.className = "panel-image-container";
+
+    const img = document.createElement("img");
+    img.src = imageUrls[i];
+    img.alt = `Example ${i + 1}`;
+
+    container.appendChild(img);
+
+    const panelImageContainer = document.getElementById(`panel-image-container-${i}`);
+    panelImageContainer.appendChild(container);
+  }
+}
+
+
 
   storageRef.listAll().then((res) => {
     res.items.forEach((imageRef, index) => {
