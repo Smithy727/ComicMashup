@@ -32,10 +32,15 @@
       <div id="menu"></div>
     </div>
     
+    
+    <div id="panel-image-grid">
+      <div class="panel-image-grid">
 
-      <div class="savedImagesContainer">
-      <div class="panel-image-container" id="panel-image-container"></div>
-  </div>
+      </div>
+    </div>
+ 
+
+    
 
       
     
@@ -49,5 +54,8 @@
 
     <script src="sketch.js"></script>
     <script type="module" src="firebase-gallery.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", displayImagesFromFirebase);
+    </script>
   </body>
 </html>

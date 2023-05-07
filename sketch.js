@@ -54,67 +54,55 @@ function setup() {
   menu.child(saveButton);
   menu.child(undoButton);
 
-  window.onload = function() {
-    displayImagesFromFirebase();
-  };
+  document.addEventListener("DOMContentLoaded", displayImagesFromFirebase);
+
   
 }
 
-// The rest of the code remains the same.
-
-function displayImagesFromFirebase() {
+async function displayImagesFromFirebase() {
   const storageRef = firebase.storage().ref();
 
-  let imageUrls = [];
-res.items.forEach((imageRef) => {
-  imageRef.getDownloadURL().then((url) => {
-    imageUrls.push(url);
-    if (imageUrls.length === res.items.length) {
-      // All image URLs have been loaded, so display them in order
-      displayImagesInOrder(imageUrls);
-    }
+  const res = await storageRef.listAll();
+  const metadataPromises = res.items.map(async (imageRef) => {
+    const metadata = await imageRef.getMetadata();
+    console.log(metadata.timeCreated); // log the timestamp for debugging
+    const downloadUrl = await imageRef.getDownloadURL();
+    return {
+      metadata,
+      downloadUrl,
+    };
   });
-});
-function displayImagesInOrder(imageUrls) {
-  for (let i = 0; i < imageUrls.length; i++) {
+
+  const imageData = await Promise.all(metadataPromises);
+  imageData.sort((a, b) => {
+    const aTime = parseInt(a.metadata.customMetadata.timestamp);
+    const bTime = parseInt(b.metadata.customMetadata.timestamp);
+    return aTime - bTime; // sort in chronological order (oldest first)
+  });
+
+  imageData.forEach(({ downloadUrl }, index) => {
     const container = document.createElement("div");
     container.className = "panel-image-container";
+    container.id = `panel-image-container-${index}`;
 
     const img = document.createElement("img");
-    img.src = imageUrls[i];
-    img.alt = `Example ${i + 1}`;
+    img.src = downloadUrl;
+    img.alt = `Example ${index + 1}`;
 
     container.appendChild(img);
 
-    const panelImageContainer = document.getElementById(`panel-image-container-${i}`);
-    panelImageContainer.appendChild(container);
-  }
-}
-
-
-
-  storageRef.listAll().then((res) => {
-    res.items.forEach((imageRef, index) => {
-      imageRef.getDownloadURL().then((url) => {
-        // Create a container element for the image
-        const container = document.createElement("div");
-        container.className = "panel-image-container";
-
-        // Create an image element
-        const img = document.createElement("img");
-        img.src = url;
-        img.alt = `Example ${index + 1}`;
-
-        // Append the image to the container element
-        container.appendChild(img);
-
-        // Append the container to the corresponding panel-image-container
-        const panelImageContainer = document.getElementById(`panel-image-container-${index}`);
-        panelImageContainer.appendChild(container);
-      });
-    });
+    const panelImageGrid = document.querySelector("#panel-image-grid .panel-image-grid");
+    panelImageGrid.appendChild(container);
   });
 }
+
+
+
+
+
+
+
+
 
 
 function draw() {
@@ -214,18 +202,25 @@ function savePanel() {
 
 function saveToFirebase(savedCanvas) {
   var storageRef = firebase.storage().ref();
-  var filename = "canvas_" + Date.now() + ".png";
+  var timestamp = Date.now().toString();
+  var filename = "canvas_" + timestamp + ".png";
   var canvasRef = storageRef.child(filename);
   fetch(savedCanvas)
     .then(res => res.blob())
     .then(blob => {
-      canvasRef.put(blob).then(function(snapshot) {
+      // Add a timestamp to the metadata
+      const metadata = {
+        customMetadata: {
+          timestamp: timestamp
+        }
+      };
+      canvasRef.put(blob, metadata).then(function(snapshot) {
         console.log('Uploaded a blob or file!');
         // Add image to gallery
         canvasRef.getDownloadURL().then(function(url) {
           var img = document.createElement('img');
           img.src = url;
-          var galleryContainer = document.getElementById('gallery');
+          var galleryContainer = document.getElementById('panel-image-grid');
           if (galleryContainer) {
             galleryContainer.appendChild(img);
           } else {
@@ -237,14 +232,5 @@ function saveToFirebase(savedCanvas) {
     });
 }
 
-var storageRef = firebase.storage().ref();
-storageRef.listAll().then(function(result) {
-  result.items.forEach(function(imageRef) {
-    imageRef.getDownloadURL().then(function(url) {
-      // Add image to gallery
-      var img = document.createElement('img');
-      img.src = url;
-      document.getElementById('panel-image-container').appendChild(img);
-    });
-  });
-});
+
+

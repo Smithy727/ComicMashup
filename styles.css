@@ -110,25 +110,32 @@ button:hover {
   margin-bottom: 50px;
 }
 
-.savedImagesContainer{
-  max-width: 60%;
+
+.panel-image-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* change to 10 columns */
+  border-spacing: 5px 5px;
+  grid-gap: 5px;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-top: 100px;
 }
 
 .panel-image-container {
-
-  margin-top: 20px;
-  border-spacing: 10px 10px;
-  grid-gap: 5px;
-  
-  
+  width: 33.333%;
+  padding: 1px;
+  box-sizing: inline-block;
 }
 
 .panel-image-container img {
-  max-width: 10%;
-  height: auto;
-  border: 5px solid var(--borders);
-  background-color: #261C69;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 10px solid var(--borders);
+  
 }
+
 
 .left-image,
 .right-image {
