@@ -124,22 +124,23 @@ button:hover {
 }
 
 
+
 .panel-image-grid {
+  
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* change to 10 columns */
+  grid-template-columns: repeat(6, 1fr); /* change to 10 columns */
   border-spacing: 5px 5px;
   grid-gap: 5px;
-  justify-items: center;
   align-items: center;
   margin-bottom: 50px;
   margin-top: 0px;
+  margin-left: 400px;
+  margin-right: 400px;
+  padding-left: 300px;
+  padding-right: 300px;
 }
 
-.panel-image-container {
-  width: 33.333%;
-  padding: 1px;
-  box-sizing: inline-block;
-}
+
 
 .panel-image-container img {
   width: 300px;
@@ -229,6 +230,7 @@ html, body {
 
 
 body {
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -241,6 +243,7 @@ body {
   background-size: cover;
   background-position: center center;
   background-attachment: fixed
+  
 }
 
 
