@@ -76,6 +76,19 @@ button {
   cursor: pointer;
   transition: all 0.3s ease 0s;
 }
+.button2 {
+  padding: 5px 5px;
+  background-color: #faa200;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  font-size: medium;
+  margin-left: 70px;
+}
 button:hover {
   background-color:#da531a; 
 }

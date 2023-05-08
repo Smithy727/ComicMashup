@@ -55,7 +55,9 @@ function setup() {
   menu.child(undoButton);
 
   document.addEventListener("DOMContentLoaded", displayImagesFromFirebase);
-
+  const randomImageHeader = select("#randomImageContainer h2");
+  randomImageHeader.mouseClicked(setRandomImage);
+  
   
 }
 
@@ -231,6 +233,44 @@ function saveToFirebase(savedCanvas) {
       });
     });
 }
+function setRandomImage() {
+  const images = [
+    "images/CatInAForest.jpg",
+    "images/Pikachu.jpg",
+    "images/StickMan.jpg",
+    "images/WinterLogCabin.jpg",
+    "images/AScaryForest.jpg",
+    "images/HouseOnFire.jpg",
+    "images/superHero3.jpg",
+    "images/superHero2.jpg",
+    "images/superHero.jpg",
+    "images/robot2.jpg",
+    "images/robot1.jpg",
+    "images/robot2.jpg",
+    "images/random4.jpg",
+    "images/random3.jpg",
+    "images/random2.jpg",
+    "images/random1.jpg",
+    "images/pikachu2.png",
+    "images/man.png",
+    "images/happy.jpg",
+    "images/animals.png",
+    "images/comicbooktheme2.png",
+    "images/comicbooktheme.png"
+  ];
+
+  const randomImage = images[Math.floor(Math.random() * images.length)];
+  const imgElement = document.querySelector("#randomImageContainer img");
+  imgElement.src = randomImage;
+}
+
+// Set a random image when the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  setRandomImage();
+  displayImagesFromFirebase();
+});
+
+
 
 
 
