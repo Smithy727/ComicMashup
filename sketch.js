@@ -270,7 +270,3 @@ document.addEventListener("DOMContentLoaded", () => {
   displayImagesFromFirebase();
 });
 
-
-
-
-
