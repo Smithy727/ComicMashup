@@ -9,7 +9,7 @@ let undoButton;
 let savedImages = [];
 let canvasHistory = [];
 
-// Your web app's Firebase configuration
+// web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyBtpDH0lCKQM7g625GZfLOHhwbYkjW-c6E",
   authDomain: "comicmashup.firebaseapp.com",
@@ -57,8 +57,6 @@ function setup() {
   document.addEventListener("DOMContentLoaded", displayImagesFromFirebase);
   const randomImageHeader = select("#randomImageContainer h2");
   randomImageHeader.mouseClicked(setRandomImage);
-  
-  
 }
 
 async function displayImagesFromFirebase() {
@@ -97,15 +95,6 @@ async function displayImagesFromFirebase() {
     panelImageGrid.appendChild(container);
   });
 }
-
-
-
-
-
-
-
-
-
 
 function draw() {
   mainCanvas.canvas.style.maxWidth = "100%";
@@ -165,7 +154,6 @@ function drawNormalBrush() {
   currentCanvas.line(pmouseX, pmouseY, mouseX, mouseY);
 }
 
-
 function drawWatercolorBrush() {
   const brushSize = brushSizeSlider.value();
   const numLayers = 15;
@@ -187,10 +175,6 @@ function drawWatercolorBrush() {
     canvases[currentCanvas].line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
-
-
-
-
 
 function switchCanvas(index) {
   currentCanvas = index;
@@ -233,6 +217,7 @@ function saveToFirebase(savedCanvas) {
       });
     });
 }
+
 function setRandomImage() {
   const images = [
     "images/CatInAForest.jpg",
